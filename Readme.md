@@ -41,4 +41,35 @@ This will start the server but after making changes you need to restart server a
 ```js
     app.use(express.json());
 ```
-10. 
+10. Install cors using 'npm i cors' to consume apis for client.
+```js
+    const cors = require('cors');
+    app.use(cors());
+```
+11. The cookie-parser middleware is used to parse cookies from incoming requests, making them available in the req.cookies object.
+```js 
+    const cookieParser = require('cookie-parser');
+    app.use(cookieParser());
+```
+
+12. Setup database:
+```js
+    //require database connection 
+    const dbConnect = require("./database/dbConnect");
+
+    // execute database connection 
+    dbConnect();  
+```
+
+13. Finally use endpoints.
+```js
+//get request when server is live
+app.get('/',(req, res)=>{
+    res.status(200).json('Server is Live');
+  })
+
+//user Router 
+const userRouter = require('./routes/userRoutes')
+app.use('/api/auth',userRouter)
+```
+14. This is the basic backend setup.
