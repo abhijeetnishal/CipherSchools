@@ -22,9 +22,9 @@ const port  = process.env.PORT || 4000;
 const cors = require('cors');
 app.use(cors());
 
-//require database connection 
-const dbConnect = require("./database/dbConnect");
-// execute database connection 
+//import database connection file
+const dbConnect = require("./models/dbConnect");
+//execute database connection 
 dbConnect(); 
 
 //start server
@@ -38,5 +38,5 @@ app.get('/',(req, res)=>{
   })
 
 //user Router 
-const userRouter = require('./routes/userRoutes')
+const userRouter = require('./routes/authRoutes')
 app.use('/api/auth',userRouter)

@@ -52,7 +52,7 @@ This will start the server but after making changes you need to restart server a
     app.use(cookieParser());
 ```
 
-12. Setup database:
+12. Setup database and import in index.js to connect to db:
 ```js
     //require database connection 
     const dbConnect = require("./database/dbConnect");
@@ -73,3 +73,8 @@ const userRouter = require('./routes/userRoutes')
 app.use('/api/auth',userRouter)
 ```
 14. This is the basic backend setup.
+
+### Create an API endpoints:
+1. create a folder name routes and create different routes file according to your need.
+2. create a file called userRoutes.js where all user related routes are present such as register, login, profile, etc.
+3. Refer the authRoutes.js and profileRoutes.js file in routes folder to know how to create and use routes.
