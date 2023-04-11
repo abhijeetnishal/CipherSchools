@@ -76,5 +76,11 @@ app.use('/api/auth',userRouter)
 
 ### Create an API endpoints:
 1. create a folder name routes and create different routes file according to your need.
-2. create a file called userRoutes.js where all user related routes are present such as register, login, profile, etc.
+2. create a file called authRoutes.js where all user related routes are present such as register, login, profile, etc.
 3. Refer the authRoutes.js and profileRoutes.js file in routes folder to know how to create and use routes.
+
+### Create a functinality for API endpoints:
+1. Create a folder name controller and create different controller files according to your need.
+2. create a file called authController.js where all functionality for route is implemented.
+3. Refer the authController.js and profileController.js in controller folder to know more.
+

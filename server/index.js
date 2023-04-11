@@ -35,8 +35,12 @@ app.listen(port, (req, res)=>{
 //get request when server is live
 app.get('/',(req, res)=>{
     res.status(200).json('Server is Live');
-  })
+})
 
-//user Router 
+//user Router  
 const userRouter = require('./routes/authRoutes')
-app.use('/api/auth',userRouter)
+app.use('/auth/',userRouter)
+
+//profile Router
+const profileRouter = require('./routes/profileRoutes');
+app.use('/profile/', profileRouter);

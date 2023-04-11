@@ -5,6 +5,9 @@ const express = require('express');
 //It is used to define routes for a specific endpoint.
 const userRouter = express.Router();
 
+//import methods from authController
+const { register, login } = require('../controller/authController');
+
 //create endpoint for registering a user.
 userRouter.post('/register-user', register);
 
