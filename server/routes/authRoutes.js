@@ -6,13 +6,16 @@ const express = require('express');
 const userRouter = express.Router();
 
 //import methods from authController
-const { register, login } = require('../controller/authController');
+const { register, login, logout } = require('../controllers/authController');
 
 //create endpoint for registering a user.
 userRouter.post('/register-user', register);
 
 //create endpoint for logging a user.
 userRouter.post('/login-user', login);
+
+//create endpoint for logout
+userRouter.post('/logout-user', logout);
 
 //export to router to use in other files (index.js file)
 module.exports = userRouter;

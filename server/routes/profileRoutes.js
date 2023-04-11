@@ -2,7 +2,7 @@ const express = require('express');
 const profileRouter = express.Router();
 
 //import methods from profileController
-const { updateUserProfile, updateUserPassword, updateUserInterest, getAllFollowers } = require('../controller/profileController');
+const { updateUserProfile, updateUserPassword, updateUserInterest, getAllFollowers } = require('../controllers/profileController');
 
 //create endpoint for updating user profile details
 profileRouter.post('/update-user-profile', updateUserProfile);
