@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
 const userSchema = require('../models/userModel');
-const userInterestSchema = require('../models/userInterestModel');
+const userInterestSchema = require('../models/userInterestsModel');
+const userFollowerSchema = require('../models/userFollowersModel');
 
 //create and save a new user with an image using multer middleware
 const multer = require('multer');
@@ -176,8 +177,28 @@ const updateUserInterest = async (req, res)=>{
 }
 
 const getAllFollowers = async (req, res)=>{
-    try{
+    //get token from cookie 
+    const token = req.cookies.auth_cookie.token;
 
+    //error handling
+    try{
+        jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
+            if(err)
+                return res.status(401).json('user not authenticated');
+            //(401) - unautherized
+            else{
+                //get details for creating test followers
+                const {name, position, followersCnt, followingOrNot} = req.body;
+                const addFollowers = {
+                    followerName: name,
+                    followerPosition: position,
+                    followersCount: followersCnt,
+                    followingOrNot: followingOrNot
+                }
+                await userFollowerSchema.create(addFollowers);
+                return res.status(200).json('follower created');
+            }
+        })
     }
     catch(error){
         console.log(error);

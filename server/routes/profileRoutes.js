@@ -14,7 +14,7 @@ profileRouter.put('/update-user-password', updateUserPassword);
 profileRouter.put('/update-user-interests', updateUserInterest);
 
 //create a endpoint for getting followers details
-profileRouter.get('/get-all-followers', getAllFollowers);
+profileRouter.post('/get-all-followers', getAllFollowers);
 
 //export to router to use in other files (index.js file)
 module.exports = profileRouter;
