@@ -3,10 +3,56 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
 const userSchema = require('../models/userModel');
+const userInterestSchema = require('../models/userInterestModel');
+
+//create and save a new user with an image using multer middleware
+const multer = require('multer');
+// configure multer middleware to handle image uploads
+const upload = multer({
+    dest: '../uploads/' // directory to store uploaded files
+  });
+
+
+/*
+1. Check if user is authenticated or not.
+2. If authenticated then take input from client and validate input.
+3. After validating input update the profile details in DB.
+*/
 
 const updateUserProfile = async (req, res)=>{
-    try{
+    //get token from cookie 
+    const token = req.cookies.auth_cookie.token;
 
+    try{
+        jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
+            if(err)
+                return res.status(401).json('user not authenticated');
+            //(401) - unautherized
+            else{
+                //taking user data from client
+                const { firstName, lastName, phone, image } = req.body;
+
+                //input validation
+                if(!firstName || !lastName){
+                    //Bad request (400)
+                    return res.status(400).json('Enter Required Input Fields');
+                }
+                else{
+                    //get id from cookie
+                    const id = req.cookies.auth_cookie.id;
+
+                    const updateUser = {
+                        firstName: firstName,
+                        lastName: lastName,
+                        phone: phone,
+                        // set the image field to the path of the uploaded image, if available
+                        image: req.file ? req.file.path : null
+                    }
+                    await userSchema.findByIdAndUpdate(id, updateUser, {new: true});
+                    res.status(200).json('Profile updated');
+                }
+            }
+        })
     }
     catch(error){
         console.log(error);
@@ -23,11 +69,8 @@ const updateUserProfile = async (req, res)=>{
 6. if matches then, update the password in DB in encrypted form.
 */
 const updateUserPassword = async (req, res)=>{
-    //taking user data from client
-    const { currentPassword, newPassword, confirmNewPassword } = req.body;
     //get token from cookie 
     const token = req.cookies.auth_cookie.token;
-    const id = req.cookies.auth_cookie.id;
 
     try{
         jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
@@ -35,6 +78,10 @@ const updateUserPassword = async (req, res)=>{
                 return res.status(401).json('user not authenticated');
             //(401) - unautherized
             else{
+                //taking user data from client
+                const { currentPassword, newPassword, confirmNewPassword } = req.body;
+                const id = req.cookies.auth_cookie.id;
+
                 //input validation
                 if(!currentPassword || !newPassword || !confirmNewPassword){
                     //Bad request (400)
@@ -74,10 +121,53 @@ const updateUserPassword = async (req, res)=>{
     }
 }
 
+/*
+1. authenticate the user
+2. get interests from client
+3. check if interest is present in DB or not if not present then create empty interest.
+4. else update the interests.
+*/
 const updateUserInterest = async (req, res)=>{
+    //get token from cookie 
+    const token = req.cookies.auth_cookie.token;
 
     try{
+        jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
+            if(err)
+                return res.status(401).json('user not authenticated');
+            //(401) - unautherized
+            else{
+                //get interests from client
+                const { interests } = req.body;
+                
+                //get userId from cookie
+                const userId = req.cookies.auth_cookie.id;
+        
+                const interestsExist = await userInterestSchema.findOne({userId: userId});
 
+                if(interestsExist){
+                    const interest = await userInterestSchema.findOne({userId: userId});
+                    //use the toString() method to convert the _id field to a string
+                    const interestId =  interest._id.toString();
+                    //update the interests data
+                    const updateInterests = {
+                        interestNames: interests,
+                        userId: userId
+                    }
+                    const updatedInterests = await userInterestSchema.findByIdAndUpdate( interestId ,updateInterests, {new: true});
+                    //updated (200-ok)
+                    return res.status(200).json({message:'user interests updated', data: updateInterests.interestNames});
+                }
+                else{
+                    const createInterests = {
+                        interestNames: interests,
+                        userId: userId
+                    }
+                    await userInterestSchema.create(createInterests);
+                    return res.status(200).json('user interests created');
+                }
+            }
+        })
     }
     catch(error){
         console.log(error);

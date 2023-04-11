@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         default: null
         //if no address is provided, the value will be null.
        },
+       image:{
+        type: String,
+        default: 'default.jpg'
+       },
        password:{
         type: String,
         require: true,

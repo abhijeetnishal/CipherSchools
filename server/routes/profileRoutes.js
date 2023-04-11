@@ -5,13 +5,13 @@ const profileRouter = express.Router();
 const { updateUserProfile, updateUserPassword, updateUserInterest, getAllFollowers } = require('../controllers/profileController');
 
 //create endpoint for updating user profile details
-profileRouter.post('/update-user-profile', updateUserProfile);
+profileRouter.put('/update-user-profile', updateUserProfile);
 
 //create endpoint for updating the password
-profileRouter.post('/update-user-password', updateUserPassword);
+profileRouter.put('/update-user-password', updateUserPassword);
 
 //create a endpoint for updating user interests.
-profileRouter.post('/update-user-interest', updateUserInterest);
+profileRouter.put('/update-user-interests', updateUserInterest);
 
 //create a endpoint for getting followers details
 profileRouter.get('/get-all-followers', getAllFollowers);
