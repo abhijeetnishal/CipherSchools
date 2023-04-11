@@ -13,6 +13,7 @@ dotenv.config();
 5. Else return user already registered.
 */
 const register = async (req, res)=>{
+    //taking user data from client
     const {firstName, lastName, email, phone, password} = req.body;
 
     //using try catch for error handling
@@ -66,6 +67,7 @@ const register = async (req, res)=>{
 6. Create a token using jwt for authentication and autherization.
 */
 const login = async (req, res)=>{
+    //taking user data from client
     const {email, password} = req.body;
 
     try{
@@ -100,14 +102,14 @@ const login = async (req, res)=>{
                     //create a jwt token
                     const token = jwt.sign({email, id:user._id}, process.env.secretKey);
                     
-                    return res.cookie('token', token, { sameSite: 'none', secure: true}).status(200).json({
-                        id:user._id,
+                    return res.cookie('auth_cookie', 
+                    {   id: user._id,
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         phone: phone,
                         token: token
-                    });
+                    }).status(200).json('user logged-in successfully');
                 }
             }
         }
@@ -118,6 +120,7 @@ const login = async (req, res)=>{
     }
 }
 
+//Clear the cookie to logout
 const logout = (req, res)=>{
     res.clearCookie('token').json('logout');
 }
