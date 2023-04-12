@@ -1,122 +1,88 @@
-.pf-user-box {
-    height: 110px;
-    position: fixed;
-    width: 100%;
-    z-index: 99!important;
-}
-.pf-user-back {
-    background-image: url('../assets/ProfileCover.png');
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-}
-.pf-user-content {
-    align-items: center;
-    background: linear-gradient(to right,var(--background),transparent,var(--background));
-    border-bottom: 1px solid var(--border-color);
+.navbar{
     display: flex;
-    gap: 1rem;
-    height: 100%;
-    justify-content: flex-start;
-    padding: 5px 40px;
-}
-.pf-user-profile-box {
-    display: flex;
-    flex-direction: column;
-}
-.MuiAvatar-root {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    font-size: 1.25rem;
-    align-items: center;
-    flex-shrink: 0;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    line-height: 1;
-    user-select: none;
-    border-radius: 50%;
-    justify-content: center;
-}
-.MuiAvatar-img {
-    color: transparent;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    text-align: center;
-    text-indent: 10000px;
-}
-.pf-user-profile-pencil {
-    align-items: center;
-    background-color: #202b47;
-    border-radius: 100%;
-    bottom: 10px;
-    cursor: pointer;
-    display: flex;
-    height: 20px;
-    justify-content: center;
-    margin-left: 15px;
-    position: absolute;
-    width: 20px;
-}
-.pf-profile-pencil-icon {
-    display: flex;
-    overflow: hidden;
-    width: 10px;
-}
-.pf-user-details {
-    display: flex;
-    flex: 1 1;
-    flex-direction: column;
-}
-.pf-user-detail-box {
-    display: flex;
-    flex: 1 1;
+    flex-direction: row;
     justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    height: 60px;
 }
-#pf-user-side {
-    padding-top: 7px;
-}
-.pf-user-greeting, .pf-user-name {
-    color: var(--text-color2);
-    line-height: 1.25;
-    padding: 0 5px;
-}
-.pf-user-greeting {
-    align-items: center;
+.iconAndIconName{
     display: flex;
-    font-size: 17px;
-    font-weight: 400;
-}
-.pf-user-name {
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    cursor: pointer;
-    display: -webkit-box;
-    font-size: 16px;
-    font-weight: var(--fw-bold);
-    margin-bottom: 2px;
-    overflow: hidden;
-}
-.pf-user-email {
-    color: var(--text-color);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.25;
-    padding: 0 5px;
-}
-.pf-right-side {
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    display: flex;
-    justify-content: center;
+    width: 165px;
 }
-.pf-user-followers-count {
-    color: var(--heading);
+.icon{
+    height: 30px;
+    width: 30px;
+}
+.iconName{
+    font-size: 18px;
+    font-weight: 600;
+}
+.browse-themeBtn-notification-search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 160px;
+}
+.browse{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 5px;
+    background-color: transparent;
+    border: 1px solid transparent;
     cursor: pointer;
+    
+}
+.browse-symbol{
+    height: 15px;
+    width: 15px;
+}
+.browse-name{
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0px 5px;
+}
+.themeBtn{
+    width: 30px;
+    background-color: black;
+}
+.downBtn{
+    padding-bottom: 7px;
     font-size: 15px;
-    font-weight: 550;
-    text-align: center;
 }
+.notification{
+    width: 15px;
+    height: 19px;
+}
+.search{
+    width: 15px;
+    height: 16px;
+}
+
+.about-me-section{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.user-profile-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+}
+.photo-name-email{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 200px;
+}
+

@@ -42,8 +42,8 @@ const Login = () => {
     })
   }
 
-  if(statusCode === 200){
-    <Navigate to={`/profile/${userId}`} />
+  if(statusCode === 200 && userId){
+    return <Navigate to={`/profile/${userId}`} />
   }
   
   return (
