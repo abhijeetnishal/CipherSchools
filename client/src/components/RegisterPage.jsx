@@ -55,21 +55,21 @@ const RegisterPage = () => {
           <input type="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number (optional)" />
           <input type="password" value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" />
         </form>
-        <div>
-        <input type='button' className="button" onClick={handleSubmit} disabled={isLoading} value='Register' /> 
-          <div className='messageDiv'>
-            {
-              btnClick?
-              (<div className='message'>
-                {
-                  isLoading ? (<Loading/>) : (message)
-                }
-              </div>):
-              (<div>
-              </div>)
-            }
+          <div>
+          <input type='button' className="button" onClick={handleSubmit} disabled={isLoading} value='Register' /> 
+            <div className='messageDiv'>
+              {
+                btnClick?
+                (<div className='message'>
+                  {
+                    isLoading ? (<Loading/>) : (message)
+                  }
+                </div>):
+                (<div>
+                </div>)
+              }
+            </div>
           </div>
-        </div>
           <div className="signup">
             <span className="signup">Already have an account?
             <Link to='/login'>Login</Link>

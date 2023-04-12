@@ -79,13 +79,13 @@ const login = async (req, res)=>{
         //validate email
         else if(!validator.isEmail(email)){
             //400 - Bad request
-            return res.status(400).json('Invalid Email Address');
+            return res.status(400).json({message:'Invalid Email Address'});
         }
         else{
             const emailExist = await userSchema.findOne({email: email});
             //check if user registered or not
             if(!emailExist){
-                return res.status(404).json('Email Not Registered');
+                return res.status(404).json({message:'Email Not Registered'});
             }
             else{
                 //compare the password saved in DB and entered by user.
@@ -94,7 +94,7 @@ const login = async (req, res)=>{
                 //if password doesn't match
                 if(!matchPassword){
                     //401 - unauthorised
-                    return res.status(401).json('Incorrect password');
+                    return res.status(401).json({message:'Incorrect password'});
                 }
                 else{
                     const user = emailExist;
@@ -102,14 +102,15 @@ const login = async (req, res)=>{
                     //create a jwt token
                     const token = jwt.sign({email, id:user._id}, process.env.secretKey);
                     
-                    return res.cookie('auth_cookie', 
+                    //create cookie for server.
+                    return res.cookie('auth_cookie',
                     {   id: user._id,
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         phone: phone,
                         token: token
-                    }).status(200).json('user logged-in successfully');
+                    }, { sameSite: 'none', secure: true}).status(200).json({id: user._id, firstName: firstName,lastName: lastName, email: email, phone: phone, message:'User logged-in successfully'});
                 }
             }
         }

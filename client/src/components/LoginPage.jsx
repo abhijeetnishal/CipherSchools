@@ -2,15 +2,18 @@ import { useState} from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import '../styles/RegisterPage.css'
 import Loading from '../components/Loading'
+import { Cookies } from "react-cookie"
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const cookies = new Cookies();
+  const [userId, setUserId] = useState('');
+
   const [btnClick, setBtnClick] = useState(false);
   const [message, setMessage] = useState('');
-  const [redirect, setRedirect] = useState(false);
-  const [userId, setUserId] = useState('');
+  const [statusCode, setStatusCode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async(e)=>{
@@ -28,37 +31,19 @@ const Login = () => {
       }),
       credentials: 'include',
     })
-
-    if(response.ok) {
-      await response.json().then(userInfo => {
-        
-      });
-    }
-    else{
-      const data = await response.json();
+    setStatusCode(response.status);
+    await response.json().then((userInfo)=>{
+      cookies.set('myCookie', userInfo, { path: '/' });
+      const cookieValue = cookies.get('myCookie');
+      //console.log(cookieValue);
+      setUserId(cookieValue.id);
+      setMessage(userInfo.message);
       setIsLoading(false);
-      setBtnClick(true);
-      setMessage(data.message);
-    }
+    })
   }
 
-  const emptyFieldFunc = ()=>{
-    setBtnClick(true);
-    setMessage('Please enter all details')
-  }
-
-  const validateEmail = (email)=> {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-
-  const invalidEmail = ()=>{
-    setBtnClick(true);
-    setMessage('Invalid email');
-  }
-
-  if(redirect){
-    return <Navigate to={`/view/${userId}`} />
+  if(statusCode === 200){
+    <Navigate to={`/profile/${userId}`} />
   }
   
   return (
@@ -71,39 +56,20 @@ const Login = () => {
           <input type="password" value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" />
         </form>
         <div>
-        {
-          (validateEmail(email) && password) ? (
-            <input type='button' className='button' onClick={handleSubmit} disabled={isLoading} value='Login' />
-          ) : 
-          (<div> {
-              !email || !password ? (
-                <input type='button' className='button' onClick={emptyFieldFunc} disabled={isLoading} value='Login' />
-                ) : ( 
-                  <div>
-                    {
-                      !validateEmail(email) ? 
-                      (<input type='button' className='button' onClick={invalidEmail} disabled={isLoading} value='Login' />):(
-                        <div> </div>  
-                      )
-                    }
-                  </div>
-                )
-            }
-          </div>)
-          }
-          <div className='messageDiv'>
-            {
-              btnClick?
-              (<div className='message'>
-                {
-                  isLoading ? (<Loading/>) : (message)
-                }
-              </div>):
-              (<div>
-              </div>)
-            }
+          <input type='button' className="button" onClick={handleSubmit} disabled={isLoading} value='Login' /> 
+            <div className='messageDiv'>
+              {
+                btnClick?
+                (<div className='message'>
+                  {
+                    isLoading ? (<Loading/>) : (message)
+                  }
+                </div>):
+                (<div>
+                </div>)
+              }
+            </div>
           </div>
-        </div>
         <div className="signup">
           <span className="signup">Don't have an account?
           <Link to='/register' >Register</Link>
