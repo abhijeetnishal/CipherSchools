@@ -1,65 +1,45 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import '../styles/RegisterPage.css'
-import Loading from '../styles/Loading.css'
+import  Loading  from '../components/Loading'
 
 const RegisterPage = () => {
-  const [username, setUserName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
   const [btnClick, setBtnClick] = useState(false);
   const [message, setMessage] = useState('');
-  const [redirect, setRedirect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [statusCode, setStatusCode] = useState(null);
   
   const handleSubmit = async(e)=>{
     setIsLoading(true);
     setBtnClick(true);
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/api/auth/register',{
+    const response = await fetch('http://localhost:4000/auth/register-user',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username,
+        firstName,
+        lastName,
         email,
+        phone,
         password
       })
     })
-    console.log(response.status);
-    const data = await response.json();
-    console.log(data);
-    if(data) {
-        console.log(data);
-        setMessage(data);
-        setRedirect(true);
-        setBtnClick(true);
-    }
-    else{
+    setStatusCode(response.status);
+    await response.json().then((data)=>{
+      setMessage(data);
       setIsLoading(false);
-      setBtnClick(true);
-      setMessage(data.message);
-    }
+    })
   }
 
-  const emptyFieldFunc = ()=>{
-      setBtnClick(true);
-      setMessage('Please enter all details')
-  }
-
-  const validateEmail = (email)=> {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-
-  const invalidEmail = ()=>{
-    setBtnClick(true);
-    setMessage('Invalid email');
-  }
-
-  if(redirect){
+  if(statusCode === 201){
     return <Navigate to={'/login'} />
   }
 
@@ -69,32 +49,14 @@ const RegisterPage = () => {
         <div className="registration form">
         <header>Register</header>
         <form>
-          <input type="text" value={username} onChange={(e) => setUserName(e.target.value)} placeholder="Enter your name" />
-          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email" />
+          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
+          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
+          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" />
+          <input type="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number (optional)" />
           <input type="password" value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" />
         </form>
         <div>
-        {
-          (username && validateEmail(email) && password) ? (
-            <input type='button' className="button" onClick={handleSubmit} disabled={isLoading} value='Register' />
-          ) : (<div> {
-              !username || !email || !password ? (
-                <input type='button' className="button" onClick={emptyFieldFunc} disabled={isLoading} value='Register' />
-                ) : ( 
-                  <div>
-                    {
-                      !validateEmail(email) ? 
-                      (<input type='button' className='button' onClick={invalidEmail} disabled={isLoading} value='Register' />):
-                      (
-                        <div> </div>  
-                      )
-                    }
-                  </div>
-                )
-            }
-            </div>
-          )
-          }
+        <input type='button' className="button" onClick={handleSubmit} disabled={isLoading} value='Register' /> 
           <div className='messageDiv'>
             {
               btnClick?
@@ -108,11 +70,11 @@ const RegisterPage = () => {
             }
           </div>
         </div>
-        <div className="signup">
-          <span className="signup">Already have an account?
-          <Link to='/login'>Login</Link>
-          </span>
-        </div>
+          <div className="signup">
+            <span className="signup">Already have an account?
+            <Link to='/login'>Login</Link>
+            </span>
+          </div>
         </div>
         </div>
       </div>

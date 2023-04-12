@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Loading.css"
 
-export default function LoadingSpinner() {
+const Loading = ()=> {
   return (
     <div className="loader">
       <div className="scanner">
@@ -10,3 +10,5 @@ export default function LoadingSpinner() {
     </div>
   );
 }
+
+export default Loading

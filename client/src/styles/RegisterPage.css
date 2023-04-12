@@ -7,19 +7,14 @@
   font-family: 'Poppins', sans-serif;
 }
 .register{
-  padding-bottom: calc(100vh + 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 .container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 18%;
-  left: 18%;
-  right: 12%;
-  min-width: 330px;
   max-width: 430px;
-
+  width: 100%;
   background: #fff;
   border-radius: 7px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
@@ -28,17 +23,17 @@
   padding: 2rem;
 }
 .form header{
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
  .form input{
-   height: 60px;
+   height: 40px;
    width: 100%;
    padding: 0 15px;
-   font-size: 17px;
-   margin-bottom: 1.3rem;
+   font-size: 14px;
+   margin-bottom: 1rem;
    border: 1px solid #ddd;
    border-radius: 6px;
    outline: none;
@@ -57,12 +52,13 @@
 input.button{
   color: #fff;
   background: #009579;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   font-weight: 500;
   letter-spacing: 1px;
-  margin-top: 1.7rem;
+  margin-top: 1.2rem;
   cursor: pointer;
   transition: 0.4s;
+  outline: none;
 }
 input.button:hover{
   background: #006653;
@@ -70,7 +66,6 @@ input.button:hover{
 .signup{
   font-size: 17px;
   text-align: center;
-  padding-top: 60px;
 }
 .signup label{
   color: #009579;
@@ -80,22 +75,27 @@ input.button:hover{
   text-decoration: underline;
 }
 .messageDiv{
-  position:absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 30px;
+  height: 50px;
 }
 .message{
   text-align: center;
   color: red;
 }
-@media screen and (min-width: 1024px) {
-  .register{
-    padding-bottom: calc(100vh - 112px);
-  }
+
+@media screen and (max-width: 480px) {
   .container{
-    left: 34%;
+    display: flex;
+    max-width: 295px;
+    width: 100%;
+  }
+  .signup{
+    font-size: 13px;
+    text-align: center;
+    padding-top: 60px;
+  }
+  .form a{
+    font-size: 13px;
+    color: #009579;
+    text-decoration: none;
   }
 }
