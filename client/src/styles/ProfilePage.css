@@ -1,3 +1,7 @@
+input:focus, button:focus, select:focus{
+    outline: none;
+}
+
 .main-container{
     background-color:  #f7f7f7;
 }
@@ -82,6 +86,7 @@
     width: 100%;
     height: 100px;
     padding: 20px 15px;
+    background-image: linear-gradient(to left, white, transparent 30%), linear-gradient(to right, white, transparent 30%), url(https://www.cipherschools.com/static/media/ProfileCover.e525f2d51356332792cb.png);
 }
 .photo-name-email{
     display: flex;
@@ -89,17 +94,30 @@
     justify-content: space-around;
     width: 200px;
 }
+#file-upload{
+    display: none;
+}
 .photo-btn{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .photo{
-    width: 20px;
-    height: 20px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid blue;
+    border-radius: 29px;
 }
 .btn{
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+.editBtnImg{
+    width: 20px;
+    height: 20px;
 }
 .hello-name-email{
     display: flex;
@@ -147,12 +165,13 @@
     align-items: center;
 
     background-color: orange;
-    width: 65px;
+    width: 70px;
     height: 30px;
     border-radius: 8px;
     border: 1px solid transparent;
     font-size: 15px;
     color: white;
+    cursor: pointer;
 }
 .aboutme-textarea{
     border-radius: 10px;
@@ -224,6 +243,14 @@
     border-radius: 8px;
     border: 1px solid transparent;
     background-color: white;
+    padding: 0px 10px;
+}
+.left-linkinput{
+    width: 95%;
+    padding-right: 25px;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid transparent;
 }
 @media screen and (max-width: 600px) {
     .websitename-container{
@@ -237,4 +264,16 @@
         width: 100%;
         padding-bottom: 10px;
     }
+    .left-linkinput{
+        width: 100%;
+    }
 }
+
+
+
+.password-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
