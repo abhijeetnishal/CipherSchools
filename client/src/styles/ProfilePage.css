@@ -1,11 +1,19 @@
+.main-container{
+    background-color:  #f7f7f7;
+}
+.horizontal-line{
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    border: 0.5px solid rgb(239, 230, 230);
+}
 .navbar{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0px 15px;
     width: 100%;
     height: 60px;
+    background-color: white;
 }
 .iconAndIconName{
     display: flex;
@@ -65,19 +73,15 @@
     height: 16px;
 }
 
-.about-me-section{
-    display: flex;
-    flex-direction: column;
-    
-}
-
 
 .user-profile-details{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 100px;
+    padding: 20px 15px;
 }
 .photo-name-email{
     display: flex;
@@ -85,4 +89,152 @@
     justify-content: space-around;
     width: 200px;
 }
+.photo-btn{
+    display: flex;
+    flex-direction: column;
+}
+.photo{
+    width: 20px;
+    height: 20px;
+}
+.btn{
+    width: 10px;
+    height: 10px;
+}
+.hello-name-email{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.hello{
+    font-size: 18px;
+}
+.name{
+    font-size: 20px;
+    font-weight: 500;
+}
+.email{
+    font-size: 13px;
+    font-weight: 350;
+}
+.follower-cnt{
+    font-size: 18px;
+}
 
+
+.about-me-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 220px;
+    padding: 20px 15px;
+}
+.aboutme-editBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+.aboutme{
+    font-size: 15px;
+    font-weight: 600;
+}
+.editBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: orange;
+    width: 65px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 15px;
+    color: white;
+}
+.aboutme-textarea{
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: white;
+    width: 100%;
+    height: 150px;
+    outline: none;
+    padding: 15px 15px;
+    resize: none;
+    font-size: 15px;
+    font-weight: 600px;
+}
+
+
+
+.cipher-text-map{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 15px;
+    width: 100%;
+}
+.cipher-map{
+    height: 170px;
+}
+
+
+
+.ontheweb-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 15px;
+}
+.ontheweb-editbtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+.grid-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+.websitename-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.websitename{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-bottom: 10px;
+}
+.linkname{
+    font-size: 15px;
+    font-weight: 450;
+    padding-bottom: 5px;
+}
+.linkinput{
+    width: 100%;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-color: white;
+}
+@media screen and (max-width: 600px) {
+    .websitename-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    }
+    .websitename{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+}

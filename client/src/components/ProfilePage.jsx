@@ -3,6 +3,7 @@ import '../styles/ProfilePage.css'
 import compass from '../assets/compass.png'
 import bellicon from '../assets/bellicon.svg'
 import searchicon from '../assets/searchicon.svg'
+import ciphermap from '../assets/ciphermap.png'
 
 const ProfilePage = () => {
   return (
@@ -38,21 +39,79 @@ const ProfilePage = () => {
             <div className='email'>abhijeet@gmail.com</div>
           </div>
         </div>
-        <div className='followercnt'>
+        <div className='follower-cnt'>
+          {} Followers
         </div>
       </div>
 
       <div className='about-me-section'>
         <div className='aboutme-editBtn'>
-          <div className='aboutme'></div>
+          <div className='aboutme'>ABOUT ME</div>
           <button className='editBtn'>Edit</button>  
         </div>
-        <textarea className='aboutme-textarea' name="" id="" cols="30" rows="10"></textarea>
+        <textarea className='aboutme-textarea' placeholder='Add something about you.' name="" id="" cols="30" rows="10"></textarea>
       </div>
 
-      <div className='cipher Map'>
+      <hr className='horizontal-line'/>
 
+      <div className='cipher-text-map'>
+        <div className='aboutme'>CIPHER MAP</div>
+        <img className='cipher-map' src={ciphermap} alt="" />
       </div>
+
+      <hr className='horizontal-line'/>
+
+      <div className='ontheweb-container'>
+        <div className='ontheweb-editbtn'>
+          <div className='aboutme'>ON THE WEB</div>
+          <div className='editBtn'>Edit</div>
+        </div>
+        <div className='grid-container'>
+          <div className='websitename-container'>
+            <div className='websitename'>
+              <div className='linkname'>
+                Linkedin
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+            <div className='websitename'>
+              <div className='linkname'>
+                GitHub
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+            </div>
+            <div className='websitename-container'>
+            <div className='websitename'>
+              <div className='linkname'>
+                Facebook
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+            <div className='websitename'>
+              <div className='linkname'>
+                Twitter
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+            </div>
+            <div className='websitename-container'>
+            <div className='websitename'>
+              <div className='linkname'>
+                Instagram
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+            <div className='websitename'>
+              <div className='linkname'>
+                Website
+              </div>
+              <input className='linkinput' type="text" placeholder='' name="" id="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }
