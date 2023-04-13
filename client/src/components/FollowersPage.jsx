@@ -3,7 +3,7 @@ import React from 'react'
 const FollowersPage = () => {
 
     async function handleSubmit(){
-        const response = await fetch('http://localhost:4000/profile/get-all-followers',{
+        const response = await fetch('https://servercipherschools.vercel.app/profile/get-all-followers',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

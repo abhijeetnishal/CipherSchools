@@ -19,7 +19,7 @@ const RegisterPage = () => {
     setIsLoading(true);
     setBtnClick(true);
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/auth/register-user',{
+    const response = await fetch('https://servercipherschools.vercel.app/auth/register-user',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ const InterestUpdate = (props) => {
     const [message, setMessage] = useState('');
 
     async function addFunc(){
-        const response = await fetch('http://localhost:4000/profile/update-user-password',{
+        const response = await fetch('https://servercipherschools.vercel.app/profile/update-user-password',{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ const Login = () => {
     setIsLoading(true);
     setBtnClick(true);
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/auth/login-user',{
+    const response = await fetch('https://servercipherschools.vercel.app/auth/login-user',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

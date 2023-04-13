@@ -28,7 +28,7 @@ const ProfilePage = () => {
   useEffect(() => {
         const fetchData = async () => {
             // get the data from the api
-            const response = await fetch(`http://localhost:4000/profile/get-user-details`,{
+            const response = await fetch(`https://servercipherschools.vercel.app/profile/get-user-details`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
