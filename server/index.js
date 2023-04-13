@@ -44,3 +44,5 @@ app.use('/auth/',userRouter)
 //profile Router
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profile/', profileRouter);
+
+module.exports = app;
