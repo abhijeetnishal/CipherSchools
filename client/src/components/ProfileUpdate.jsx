@@ -4,7 +4,7 @@ import userProfile from '../assets/user.png'
 import editBtn from '../assets/editbtn.png'
 
 const ProfileUpdate = (props) => {
-    const {onClose, editData, updateBtn} = props;
+    const {onClose} = props;
     const [postImage, setPostImage] = useState({myFile: ""});
 
     function convertToBase64(file){
@@ -25,24 +25,39 @@ const ProfileUpdate = (props) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file);
       setPostImage({...postImage, myFile: base64});
-      setNewImage(postImage.myFile);
     }
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [mobile, setMobile] = useState('');
     const [message, setMessage] = useState('');
-    const [newImage, setNewImage] = useState('');
+    const [statusCode, setStatusCode] = useState(0);
 
-    function handleSubmit(){
-        if(firstName && lastName){
-            updateBtn(true);
-            editData({firstName, lastName, mobile, newImage});
-        }
-        else
-            setMessage('Enter Details');
+
+    async function handleSubmit(){
+        const response = await fetch('http://localhost:4000/profile/update-user-profile',{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            firstName, 
+            lastName,
+            mobile,
+            image: postImage.myFile
+        }),
+        credentials: 'include',
+        });
+        setStatusCode(response.status);
+        response.json().then(data => ({
+            data: data,
+        })
+        ).then(res => {
+            setMessage(res.data.message);
+            if(statusCode===200)
+                window.location.reload(false);
+        })
     }
-
     
     return (
         <div onClick={onClose} className='editOverlay'>

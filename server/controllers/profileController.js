@@ -197,9 +197,36 @@ const getAllFollowers = async (req, res)=>{
     }
 }
 
+const getUserDetails = async(req, res)=>{
+    //get token from cookie 
+    const token = req.cookies.auth_cookie.token;
+
+    //error handling
+    try{
+        jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
+            if(err)
+                return res.status(401).json('user not authenticated');
+            //(401) - unautherized
+            else{
+                //get user-id
+                const id = req.cookies.auth_cookie.id;
+
+                const userDetails = await userSchema.findOne({_id: id});
+                //send user data
+                res.status(200).json({firstName: userDetails.firstName, lastName: userDetails.lastName, phone: userDetails.phone, image: userDetails.image})
+            }
+        })
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json('Internal Server Error');
+    }
+}
+
 module.exports = {
     updateUserProfile,
     updateUserPassword,
     updateUserInterest,
-    getAllFollowers
+    getAllFollowers,
+    getUserDetails
 }

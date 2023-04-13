@@ -6,67 +6,55 @@ import searchicon from '../assets/searchicon.svg'
 import ciphermap from '../assets/ciphermap.png'
 import userProfile from '../assets/user.png'
 import editBtn from '../assets/editbtn.png'
-import PasswordUpdate from './PasswordUpdate';
+import PasswordUpdate from './PasswordUpdate'
 import ProfileUpdate from './ProfileUpdate'
+import {Cookies} from 'react-cookie'
 
 const ProfilePage = () => {
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
   const [showPopUpProfile, setShowPopUpProfile] = useState(false);
 
+  const cookie = new Cookies();
+  const email = cookie.get('myCookie').email;
+
   const [newImage, setNewImage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  //eslint-disable-next-line
   const [mobile, setMobile] = useState('');
   const [statusCode, setStatusCode] = useState(0);
 
-  const [updateData, setUpdateData] = useState({firstName:'', lastName:'', mobile:'', image:''});
-  const [updateBtnClick, setUpdateBtnClick] = useState(false);
-
-  useEffect(()=>{
-    setUpdateData(updateData);
-    console.log(updateData);
-
-        const firstName = updateData.firstName;
-        const lastName = updateData.lastName;
-        const mobile = updateData.mobile;
-        const image = updateData.image;
-        if(firstName!=='' && lastName!=='' && updateBtnClick){
-          async function handleSubmit(){
-            const response = await fetch('http://localhost:4000/profile/update-user-profile',{
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                firstName, 
-                lastName,
-                mobile,
-                image
-            }),
-            credentials: 'include',
+  useEffect(() => {
+        const fetchData = async () => {
+            // get the data from the api
+            const response = await fetch(`http://localhost:4000/profile/get-user-details`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
             });
             setStatusCode(response.status);
             response.json().then(data => ({
                 data: data,
             })
             ).then(res => {
-                console.log(res.data);
                 setFirstName(res.data.firstName);
                 setLastName(res.data.lastName);
                 setMobile(res.data.mobile);
                 setNewImage(res.data.image);
-                // if(statusCode===200)
-                //     window.location.reload(false);
+                if(statusCode===201)
+                  window.location.reload(false);
             })
         }
-          handleSubmit();
-        }
-
-  }, [])
-  if(updateBtnClick && updateData.image){
-    setNewImage(updateData.image);
-  }
-
+        
+        // call the function
+        fetchData()
+        // make sure to catch any error
+        .catch(console.error);
+    //eslint-disable-next-line
+}, []);
+  
   function handleCloseDialogUpdate(){
     setShowPopUpUpdate(false);
   }
@@ -115,16 +103,14 @@ const ProfilePage = () => {
               (showPopUpProfile) && (
                   <ProfileUpdate
                       onClose={handleCloseDialogProfile}
-                      editData = {setUpdateData}
-                      updateBtn = {setUpdateBtnClick}
                   />
               )
           }
           </div>
           <div className='hello-name-email'>
             <div className='hello'>Hello,</div>
-            <div className='name'>Abhijeet</div>
-            <div className='email'>abhijeet@gmail.com</div>
+            <div className='name'>{firstName+' '+lastName}</div>
+            <div className='email'>{email}</div>
           </div>
         </div>
         <div className='follower-cnt'>
