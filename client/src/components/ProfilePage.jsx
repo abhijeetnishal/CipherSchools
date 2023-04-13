@@ -9,7 +9,7 @@ import editBtn from '../assets/editbtn.png'
 import PasswordUpdate from './PasswordUpdate'
 import ProfileUpdate from './ProfileUpdate'
 import {Cookies} from 'react-cookie'
-import FollowersPage from './FollowersPage'
+//import FollowersPage from './FollowersPage'
 
 const ProfilePage = () => {
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
@@ -129,7 +129,7 @@ const ProfilePage = () => {
 
       <hr className='horizontal-line'/>
 
-      <FollowersPage/>
+      {/* <FollowersPage/> */}
 
       <div className='cipher-text-map'>
         <div className='aboutme'>CIPHER MAP</div>
