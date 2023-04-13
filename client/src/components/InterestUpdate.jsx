@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/PasswordUpdate.css'
 
-const PasswordUpdate = (props) => {
+const InterestUpdate = (props) => {
     const {onClose} = props;
 
     const [currentPassword, setCurrentPassword] = useState('');
@@ -41,7 +41,7 @@ const PasswordUpdate = (props) => {
                         <label htmlFor="" className='websiteName'>Current Password</label>
                     </div>
                     <div>
-                        <input className='inputField' type="password" name="websitename" placeholder='Current Password'  value={currentPassword} onChange={(e)=>setCurrentPassword(e.target.value)} /> 
+                        <input className='inputField' type="password" name="websitename" value={currentPassword} placeholder='Current Password' onChange={(e)=>setCurrentPassword(e.target.value)} /> 
                     </div>
                 </div>
                 <div className='passwordContainer'>
@@ -74,4 +74,4 @@ const PasswordUpdate = (props) => {
     )
 }
 
-export default PasswordUpdate
+export default InterestUpdate

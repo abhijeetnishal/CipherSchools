@@ -6,14 +6,6 @@ const userSchema = require('../models/userModel');
 const userInterestSchema = require('../models/userInterestsModel');
 const userFollowerSchema = require('../models/userFollowersModel');
 
-//create and save a new user with an image using multer middleware
-const multer = require('multer');
-// configure multer middleware to handle image uploads
-const upload = multer({
-    dest: '../uploads/' // directory to store uploaded files
-  });
-
-
 /*
 1. Check if user is authenticated or not.
 2. If authenticated then take input from client and validate input.
@@ -27,7 +19,7 @@ const updateUserProfile = async (req, res)=>{
     try{
         jwt.verify(token, process.env.secretKey, {}, async(err, info)=>{
             if(err)
-                return res.status(401).json('user not authenticated');
+                return res.status(401).json({message: 'user not authenticated'});
             //(401) - unautherized
             else{
                 //taking user data from client
@@ -36,7 +28,7 @@ const updateUserProfile = async (req, res)=>{
                 //input validation
                 if(!firstName || !lastName){
                     //Bad request (400)
-                    return res.status(400).json('Enter Required Input Fields');
+                    return res.status(400).json({message:'Enter Required Input Fields'});
                 }
                 else{
                     //get id from cookie
@@ -46,18 +38,17 @@ const updateUserProfile = async (req, res)=>{
                         firstName: firstName,
                         lastName: lastName,
                         phone: phone,
-                        // set the image field to the path of the uploaded image, if available
-                        image: req.file ? req.file.path : null
+                        image: image || ''
                     }
                     await userSchema.findByIdAndUpdate(id, updateUser, {new: true});
-                    res.status(200).json('Profile updated');
+                    res.status(200).json({ firstName, lastName, phone, image, message:'Profile updated'});
                 }
             }
         })
     }
     catch(error){
         console.log(error);
-        res.status(500).json('Internal Server Error');
+        res.status(500).json({message:'Internal Server Error'});
     }
 }
 

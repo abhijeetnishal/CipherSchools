@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/ProfilePage.css'
 import compass from '../assets/compass.png'
 import bellicon from '../assets/bellicon.svg'
@@ -7,39 +7,80 @@ import ciphermap from '../assets/ciphermap.png'
 import userProfile from '../assets/user.png'
 import editBtn from '../assets/editbtn.png'
 import PasswordUpdate from './PasswordUpdate';
+import ProfileUpdate from './ProfileUpdate'
 
 const ProfilePage = () => {
-  const [postImage, setPostImage] = useState({myFile: ""});
-
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
+  const [showPopUpProfile, setShowPopUpProfile] = useState(false);
 
-  function convertToBase64(file){
-    return new Promise((resolve, reject)=>{
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = ()=>{
-        resolve(fileReader.result)
-      };
-      fileReader.onerror = (error)=>{
-        reject(error)
-      }
-    })
-  }
+  const [newImage, setNewImage] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [statusCode, setStatusCode] = useState(0);
 
-  const handleFileUpload = async (e)=>{
-    e.preventDefault();
-    const file = e.target.files[0];
-    const base64 = await convertToBase64(file);
-    //console.log(base64);
-    setPostImage({...postImage, myFile: base64});
+  const [updateData, setUpdateData] = useState({firstName:'', lastName:'', mobile:'', image:''});
+  const [updateBtnClick, setUpdateBtnClick] = useState(false);
+
+  useEffect(()=>{
+    setUpdateData(updateData);
+    console.log(updateData);
+
+        const firstName = updateData.firstName;
+        const lastName = updateData.lastName;
+        const mobile = updateData.mobile;
+        const image = updateData.image;
+        if(firstName!=='' && lastName!=='' && updateBtnClick){
+          async function handleSubmit(){
+            const response = await fetch('http://localhost:4000/profile/update-user-profile',{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName, 
+                lastName,
+                mobile,
+                image
+            }),
+            credentials: 'include',
+            });
+            setStatusCode(response.status);
+            response.json().then(data => ({
+                data: data,
+            })
+            ).then(res => {
+                console.log(res.data);
+                setFirstName(res.data.firstName);
+                setLastName(res.data.lastName);
+                setMobile(res.data.mobile);
+                setNewImage(res.data.image);
+                // if(statusCode===200)
+                //     window.location.reload(false);
+            })
+        }
+          handleSubmit();
+        }
+
+  }, [])
+  if(updateBtnClick && updateData.image){
+    setNewImage(updateData.image);
   }
 
   function handleCloseDialogUpdate(){
     setShowPopUpUpdate(false);
   }
 
+  function handleCloseDialogProfile(){
+    setShowPopUpProfile(false);
+  }
+
   function handleUpdateClick(){
     setShowPopUpUpdate(true);
+  }
+
+  function handleProfileClick(){
+    setShowPopUpProfile(true);
   }
 
   return (
@@ -66,11 +107,19 @@ const ProfilePage = () => {
       <div className='user-profile-details'>
         <div className='photo-name-email'>
           <div className='photo-btn'>
-            <img className='photo' src={userProfile} alt="" />
-            <input onChange={(e)=> handleFileUpload(e)} type="file" lable="Image" accept='.jpeg, .png, .jpg' name="myFile" id="file-upload" />
-            <label htmlFor="file-upload" className='btn'> 
+            <img className='photo' src={newImage || userProfile} alt="" />
+            <button onClick={handleProfileClick} htmlFor="file-upload" className='btn'> 
               <img className='editBtnImg' src={editBtn} alt="" />
-            </label>
+            </button>
+            {
+              (showPopUpProfile) && (
+                  <ProfileUpdate
+                      onClose={handleCloseDialogProfile}
+                      editData = {setUpdateData}
+                      updateBtn = {setUpdateBtnClick}
+                  />
+              )
+          }
           </div>
           <div className='hello-name-email'>
             <div className='hello'>Hello,</div>

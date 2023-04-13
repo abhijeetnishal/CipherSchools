@@ -1,72 +1,89 @@
 import React, { useState } from 'react'
-import SaveBtn from '../../assets/save-btn.png'
-import '../../styles/EditPassword.css'
+import '../styles/ProfileUpdate.css'
+import userProfile from '../assets/user.png'
+import editBtn from '../assets/editbtn.png'
 
 const ProfileUpdate = (props) => {
-    const {onClose} = props;
+    const {onClose, editData, updateBtn} = props;
+    const [postImage, setPostImage] = useState({myFile: ""});
+
+    function convertToBase64(file){
+      return new Promise((resolve, reject)=>{
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = ()=>{
+          resolve(fileReader.result)
+        };
+        fileReader.onerror = (error)=>{
+          reject(error)
+        }
+      })
+    }
+    
+    const handleFileUpload = async (e)=>{
+      e.preventDefault();
+      const file = e.target.files[0];
+      const base64 = await convertToBase64(file);
+      setPostImage({...postImage, myFile: base64});
+      setNewImage(postImage.myFile);
+    }
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
-    const [image, setImage] = useState()
     const [message, setMessage] = useState('');
+    const [newImage, setNewImage] = useState('');
 
-    async function addFunc(){
-      if(firstName && lastName && email){
-        const response = await fetch('http://localhost:4000/passwords',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            
-        }),
-        credentials: 'include',
-        });
-        response.json().then(data => ({
-            data: data,
-        })
-        ).then(res => {
-            //console.log(res);
-            window.location.reload(false);
-        })
-      }
-      else{
-        setMessage('Enter All Details');
-      }
+    function handleSubmit(){
+        if(firstName && lastName){
+            updateBtn(true);
+            editData({firstName, lastName, mobile, newImage});
+        }
+        else
+            setMessage('Enter Details');
     }
+
     
     return (
         <div onClick={onClose} className='editOverlay'>
-            <div onClick={(e) => {e.stopPropagation();}} className='editModalContainer'>
-                <div className='editDataText'>Add New </div>
-                <div className='websiteNameContainer'>
-                    <div>
-                        <label htmlFor="" className='websiteName'>Website Name</label>
+            <div onClick={(e) => {e.stopPropagation()}} className='editModalContainer'>
+                <div className='editDataText'>Profile Update </div>
+                    <div className='photo-info-container'>
+                    <div className='profile-photo-btn'>
+                        <img className='photo-img' src={postImage.myFile || userProfile} alt="" />
+                        <input onChange={(e)=> handleFileUpload(e)} type="file" lable="Image" accept='.jpeg, .png, .jpg' name="myFile" id="file-upload" />
+                        <label htmlFor="file-upload" className='btn-edit'> 
+                        <img className='editBtnImg' src={editBtn} alt="" />
+                        </label>
                     </div>
-                    <div>
-                        <input className='inputField' type="text" name="websitename" value={firstName} placeholder='websitename' onChange={(e)=>setWebsiteName(e.target.value)} /> 
+                        <div className='all-info-container'>
+                        <div className='info-container'>
+                            <div className='info-type-name'>First Name</div>
+                            <input className='info-input' value={firstName} onChange={(e)=>setFirstName(e.target.value)} type="text" placeholder='First Name' />
+                        </div>   
+                        <div className='info-container'>
+                            <div className='info-type-name'>Last Name</div>
+                            <input className='info-input' value={lastName} onChange={(e)=>setLastName(e.target.value)} type="text" placeholder='Last Name' />
+                        </div> 
+                        <div className='info-container'>
+                            <div className='info-type-name'>Email Address</div>
+                            <div className='info-input'>{}</div>
+                        </div> 
+                        <div className='info-container'>
+                            <div className='info-type-name'>Mobile Number</div>
+                            <input className='info-input' value={mobile} onChange={(e)=>setMobile(e.target.value)} type="text" placeholder='Mobile Number' />
+                        </div> 
+                            <div className='cancel-save-btn'>
+                                <button className='cancel-btn' onClick={onClose}>cancel </button>
+                                <button className='save-btn' onClick={handleSubmit}>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='passwordContainer'>
-                    <div>
-                        <label htmlFor="" className='websiteName'>Password</label>
+                    <div className='edit-message'>
+                        {message}
                     </div>
-                    <div>
-                        <input className='inputField' type="password" name="password" value={lastName} placeholder='password' onChange={(e)=>setPassword(e.target.value)} />
-                    </div>
-                </div>
-                <div className='editBtnContainer'>
-                    <button className='cancelBtn' onClick={onClose}>cancel </button>
-                    <button className='saveBtn' onClick={addFunc}>
-                        <img className='saveBtnImg' src={SaveBtn} alt="" />
-                        <div className='saveText'>Save</div>
-                    </button>
-                </div>
-                <div className='editMessage'>
-                    {message}
-                </div>
             </div>
         </div>
     )
