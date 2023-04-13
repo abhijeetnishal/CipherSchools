@@ -178,16 +178,11 @@ const getAllFollowers = async (req, res)=>{
                 return res.status(401).json('user not authenticated');
             //(401) - unautherized
             else{
-                //get details for creating test followers
-                const {name, position, followersCnt, followingOrNot} = req.body;
-                const addFollowers = {
-                    followerName: name,
-                    followerPosition: position,
-                    followersCount: followersCnt,
-                    followingOrNot: followingOrNot
-                }
-                await userFollowerSchema.create(addFollowers);
-                return res.status(200).json('follower created');
+                //get details of followers
+                // Empty `filter` means "match all documents"
+                const getFollowers = await userFollowerSchema.find();
+
+                return res.status(200).json(getFollowers);
             }
         })
     }

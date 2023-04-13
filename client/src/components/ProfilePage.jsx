@@ -9,6 +9,7 @@ import editBtn from '../assets/editbtn.png'
 import PasswordUpdate from './PasswordUpdate'
 import ProfileUpdate from './ProfileUpdate'
 import {Cookies} from 'react-cookie'
+import FollowersPage from './FollowersPage'
 
 const ProfilePage = () => {
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
@@ -105,7 +106,7 @@ const ProfilePage = () => {
                       onClose={handleCloseDialogProfile}
                   />
               )
-          }
+            }
           </div>
           <div className='hello-name-email'>
             <div className='hello'>Hello,</div>
@@ -114,7 +115,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className='follower-cnt'>
-          {} Followers
+          7 Followers
         </div>
       </div>
 
@@ -127,6 +128,8 @@ const ProfilePage = () => {
       </div>
 
       <hr className='horizontal-line'/>
+
+      <FollowersPage/>
 
       <div className='cipher-text-map'>
         <div className='aboutme'>CIPHER MAP</div>
