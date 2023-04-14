@@ -14,7 +14,7 @@ profileRouter.put('/update-user-password', updateUserPassword);
 profileRouter.put('/update-user-interests', updateUserInterest);
 
 //create a endpoint for getting followers details
-profileRouter.post('/get-all-followers', getAllFollowers);
+profileRouter.get('/get-all-followers', getAllFollowers);
 
 //create a endpoint to get user details
 profileRouter.get('/get-user-details', getUserDetails);

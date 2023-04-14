@@ -10,7 +10,7 @@ const FollowersPage = () => {
     useEffect(()=>{
         async function handleSubmit(){
             const response = await fetch('https://servercipherschools.vercel.app/profile/get-all-followers',{
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
