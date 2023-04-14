@@ -54,15 +54,17 @@ const ProfileUpdate = (props) => {
         credentials: 'include',
         });
         setStatusCode(response.status);
+        
         response.json().then(data => ({
             data: data,
         })
         ).then(res => {
             setMessage(res.data.message);
-            if(statusCode===200)
-                window.location.reload(false);
         })
     }
+
+    if(statusCode===200)
+        window.location.reload(false);
     
     return (
         <div onClick={onClose} className='editOverlay'>

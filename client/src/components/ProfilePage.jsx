@@ -10,10 +10,12 @@ import PasswordUpdate from './PasswordUpdate'
 import ProfileUpdate from './ProfileUpdate'
 import {Cookies} from 'react-cookie'
 import {Link} from 'react-router-dom'
+import InterestUpdate from './InterestUpdate'
 
 const ProfilePage = () => {
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
   const [showPopUpProfile, setShowPopUpProfile] = useState(false);
+  const [showPopUpInterest, setShowPopUpInterest] = useState(false);
 
   const cookie = new Cookies();
   const email = cookie.get('myCookie').email;
@@ -63,6 +65,9 @@ const ProfilePage = () => {
   function handleCloseDialogProfile(){
     setShowPopUpProfile(false);
   }
+  function handleCloseDialogInterest(){
+    setShowPopUpInterest(false)
+  }
 
   function handleUpdateClick(){
     setShowPopUpUpdate(true);
@@ -70,6 +75,9 @@ const ProfilePage = () => {
 
   function handleProfileClick(){
     setShowPopUpProfile(true);
+  }
+  function handleInterestClick(){
+    setShowPopUpInterest(true);
   }
 
   return (
@@ -243,10 +251,15 @@ const ProfilePage = () => {
       <div className='ontheweb-container'>
         <div className='ontheweb-editbtn'>
           <div className='aboutme'>INTERESTS</div>
-          <button className='editBtn'>Edit</button> 
+          <button onClick={handleInterestClick} className='editBtn'>Edit</button> 
+          {
+              (showPopUpInterest) && (
+                  <InterestUpdate 
+                  onClose={handleCloseDialogInterest}
+              />
+              )
+          }
         </div>
-          <div className='password-container'>
-          </div>
       </div>
         
     </div>

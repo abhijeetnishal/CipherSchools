@@ -7,7 +7,7 @@ const PasswordUpdate = (props) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-
+    const [statusCode, setStatusCode] = useState('');
     const [message, setMessage] = useState('');
 
     async function addFunc(){
@@ -23,6 +23,7 @@ const PasswordUpdate = (props) => {
         }),
         credentials: 'include',
         });
+        setStatusCode(response.status);
         response.json().then(data => ({
             data: data,
         })
@@ -32,6 +33,9 @@ const PasswordUpdate = (props) => {
             //window.location.reload(false);
         })
     }
+
+    if(statusCode===200)
+        window.location.reload(false);
     
     return (
         <div onClick={onClose} className='editOverlay'>

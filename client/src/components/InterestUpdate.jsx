@@ -17,9 +17,7 @@ const InterestUpdate = (props) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            currentPassword,
-            newPassword,
-            confirmNewPassword
+            
         }),
         credentials: 'include',
         });
@@ -27,7 +25,7 @@ const InterestUpdate = (props) => {
             data: data,
         })
         ).then(res => {
-            console.log(res);
+            //console.log(res);
             setMessage(res.data);
             //window.location.reload(false);
         })
