@@ -25,14 +25,15 @@ const InterestUpdate = (props) => {
         ).then(res => {
             //console.log(res);
             setMessage(res.data);
-            //window.location.reload(false);
         })
     }
     
     return (
         <div onClick={onClose} className='editOverlay'>
             <div onClick={(e) => {e.stopPropagation();}} className='editModalContainer'>
-                
+                <div className='interest-container'>
+                    <button className=''></button>
+                </div>
                 
                 
                 <div className='editBtnContainer'>

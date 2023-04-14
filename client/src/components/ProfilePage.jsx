@@ -253,11 +253,11 @@ const ProfilePage = () => {
           <div className='aboutme'>INTERESTS</div>
           <button onClick={handleInterestClick} className='editBtn'>Edit</button> 
           {
-              (showPopUpInterest) && (
-                  <InterestUpdate 
-                  onClose={handleCloseDialogInterest}
-              />
-              )
+              // (showPopUpInterest) && (
+              //     <InterestUpdate 
+              //     onClose={handleCloseDialogInterest}
+              //     />
+              // )
           }
         </div>
       </div>
