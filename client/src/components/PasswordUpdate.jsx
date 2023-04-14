@@ -35,7 +35,7 @@ const PasswordUpdate = (props) => {
     
     return (
         <div onClick={onClose} className='editOverlay'>
-            <div onClick={(e) => {e.stopPropagation();}} className='editModalContainer'>
+            <div onClick={(e) => {e.stopPropagation();}} className='passwordModalContainer'>
                 <div className='websiteNameContainer'>
                     <div>
                         <label htmlFor="" className='websiteName'>Current Password</label>

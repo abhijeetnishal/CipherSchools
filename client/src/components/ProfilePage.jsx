@@ -9,7 +9,7 @@ import editBtn from '../assets/editbtn.png'
 import PasswordUpdate from './PasswordUpdate'
 import ProfileUpdate from './ProfileUpdate'
 import {Cookies} from 'react-cookie'
-//import FollowersPage from './FollowersPage'
+import {Link} from 'react-router-dom'
 
 const ProfilePage = () => {
   const [showPopUpUpdate, setShowPopUpUpdate]  = useState(false);
@@ -114,9 +114,9 @@ const ProfilePage = () => {
             <div className='email'>{email}</div>
           </div>
         </div>
-        <div className='follower-cnt'>
-          7 Followers
-        </div>
+        <Link to='/followers' className='follower-cnt'>
+           7 Followers
+        </Link>
       </div>
 
       <div className='about-me-section'>
@@ -128,8 +128,6 @@ const ProfilePage = () => {
       </div>
 
       <hr className='horizontal-line'/>
-
-      {/* <FollowersPage/> */}
 
       <div className='cipher-text-map'>
         <div className='aboutme'>CIPHER MAP</div>

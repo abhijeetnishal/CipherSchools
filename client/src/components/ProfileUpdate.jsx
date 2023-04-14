@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import '../styles/ProfileUpdate.css'
 import userProfile from '../assets/user.png'
 import editBtn from '../assets/editbtn.png'
+import { Cookies } from "react-cookie"
 
 const ProfileUpdate = (props) => {
     const {onClose} = props;
     const [postImage, setPostImage] = useState({myFile: ""});
+
+    const cookies = new Cookies();
+    const cookieValue = cookies.get('myCookie');
+    const email = cookieValue.email;
 
     function convertToBase64(file){
       return new Promise((resolve, reject)=>{
@@ -31,7 +36,7 @@ const ProfileUpdate = (props) => {
     const [lastName, setLastName] = useState('');
     const [mobile, setMobile] = useState('');
     const [message, setMessage] = useState('');
-    const [statusCode, setStatusCode] = useState(0);
+    const [statusCode, setStatusCode] = useState('');
 
 
     async function handleSubmit(){
@@ -82,7 +87,7 @@ const ProfileUpdate = (props) => {
                         </div> 
                         <div className='info-container'>
                             <div className='info-type-name'>Email Address</div>
-                            <div className='info-input'>{}</div>
+                            <div className='info-input'>{email}</div>
                         </div> 
                         <div className='info-container'>
                             <div className='info-type-name'>Mobile Number</div>
