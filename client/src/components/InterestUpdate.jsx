@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/PasswordUpdate.css'
+import '../styles/InterestUpdate.css'
 
 const InterestUpdate = (props) => {
     const {onClose} = props;
@@ -29,17 +29,32 @@ const InterestUpdate = (props) => {
     }
     
     return (
-        <div onClick={onClose} className='editOverlay'>
-            <div onClick={(e) => {e.stopPropagation();}} className='editModalContainer'>
+        <div onClick={onClose} className='interestOverlay'>
+            <div onClick={(e) => {e.stopPropagation();}} className='interestModalContainer'>
                 <div className='interest-container'>
-                    <button className=''></button>
+                    <div className='sub-interest-container'>
+                        <button className='appdev'>App Development</button>
+                        <button className='appdev'>Web Development</button>
+                    </div>
+                    <div className='sub-interest-container'>
+                        <button className='appdev'>Game Development</button>
+                        <button className='appdev'>Data Structures</button>
+                    </div>
+                    <div className='sub-interest-container'>
+                        <button className='appdev'>Programming</button>
+                        <button className='appdev'>Machine Learning</button>
+                    </div>
+                    <div className='sub-interest-container'>
+                        <button className='appdev'>Data Science</button>
+                        <button className='appdev'>Others</button>
+                    </div>
                 </div>
                 
                 
-                <div className='editBtnContainer'>
-                    <button className='cancelBtn' onClick={onClose}>cancel </button>
-                    <button className='saveBtn' onClick={addFunc}>
-                        <div className='saveText'>Save</div>
+                <div className='interestBtnContainer'>
+                    <button className='cancel-btn' onClick={onClose}>cancel </button>
+                    <button className='save-btn' onClick={addFunc}>
+                        Save
                     </button>
                 </div>
                 <div className='editMessage'>

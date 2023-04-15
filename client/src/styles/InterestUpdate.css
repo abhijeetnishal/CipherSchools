@@ -1,0 +1,90 @@
+.interestOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+.interestModalContainer{
+    width: 450px;
+    height: 300px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+    z-index: 2;
+
+    padding: 20px 10px;
+}
+.interest-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+}
+.sub-interest-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.appdev{
+    width: 183px;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    /* identical to box height, or 188% */
+
+    text-align: start;
+
+    color: black;
+    background-color: rgb(225, 225, 225);
+    cursor: pointer;
+    padding-left: 5px;
+}
+.interestBtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+
+@media screen and (max-width: 480px) {
+    .interestModalContainer{
+        width: 280px;
+        height: 500px;
+    }
+    .interest-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 430px;
+    }
+    .sub-interest-container{
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+        margin-bottom: 0px;
+    }
+    .appdev{
+        width: 260px;
+        height: 40px;
+    }
+    .interestBtnContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 15px;
+    }
+}
