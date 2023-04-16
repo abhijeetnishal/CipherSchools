@@ -41,6 +41,7 @@ const ProfileUpdate = (props) => {
 
     async function handleSubmit(){
         const response = await fetch('https://servercipherschools.vercel.app/profile/update-user-profile',{
+        mode: 'no-cors',
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
