@@ -300,7 +300,6 @@ const ProfilePage = () => {
             ))) : 
             (
               <div>
-
               </div>
             )
           }
