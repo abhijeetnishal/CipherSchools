@@ -110,7 +110,7 @@ const login = async (req, res)=>{
                         email: email,
                         phone: phone,
                         token: token
-                    }, { sameSite: 'none', secure: true}).status(200).json({id: user._id, firstName: firstName,lastName: lastName, email: email, phone: phone, message:'User logged-in successfully'});
+                    },).status(200).json({id: user._id, firstName: firstName,lastName: lastName, email: email, phone: phone, message:'User logged-in successfully'});
                 }
             }
         }
