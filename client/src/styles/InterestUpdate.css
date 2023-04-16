@@ -35,7 +35,7 @@
     height: 40px;
     margin-bottom: 10px;
 }
-.appdev{
+.white{
     width: 183px;
     height: 40px;
     border: 1px solid transparent;
@@ -50,6 +50,24 @@
 
     color: black;
     background-color: rgb(225, 225, 225);
+    cursor: pointer;
+    padding-left: 5px;
+}
+.orange{
+    width: 183px;
+    height: 40px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    /* identical to box height, or 188% */
+
+    text-align: start;
+
+    color: white;
+    background-color: orange;
     cursor: pointer;
     padding-left: 5px;
 }

@@ -26,37 +26,67 @@ const ProfilePage = () => {
   //eslint-disable-next-line
   const [mobile, setMobile] = useState('');
   const [statusCode, setStatusCode] = useState(0);
+  const [interestData, setInterestdata] = useState([]);
+  const [interestSize, setInterestSize] = useState(0);
 
   useEffect(() => {
-        const fetchData = async () => {
-            // get the data from the api
-            const response = await fetch(`https://servercipherschools.vercel.app/profile/get-user-details`,{
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-            });
-            setStatusCode(response.status);
-            response.json().then(data => ({
-                data: data,
-            })
-            ).then(res => {
-                setFirstName(res.data.firstName);
-                setLastName(res.data.lastName);
-                setMobile(res.data.mobile);
-                setNewImage(res.data.image);
-                if(statusCode===201)
-                  window.location.reload(false);
-            })
-        }
-        
-        // call the function
-        fetchData()
-        // make sure to catch any error
-        .catch(console.error);
-    //eslint-disable-next-line
-}, []);
+      const fetchData = async () => {
+          // get the data from the api
+          const response = await fetch(`https://servercipherschools.vercel.app/profile/get-user-details`,{
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+          });
+          setStatusCode(response.status);
+          response.json().then(data => ({
+              data: data,
+          })
+          ).then(res => {
+              setFirstName(res.data.firstName);
+              setLastName(res.data.lastName);
+              setMobile(res.data.mobile);
+              setNewImage(res.data.image);
+              if(statusCode===201)
+                window.location.reload(false);
+          })
+      }
+      
+      // call the function
+      fetchData()
+      // make sure to catch any error
+      .catch(console.error);
+  //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        // get the data from the api
+        const response = await fetch(`https://servercipherschools.vercel.app/profile/get-all-interests`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        });
+        setStatusCode(response.status);
+        response.json().then(data => ({
+            data: data,
+        })
+        ).then(res => {
+          console.log(res.data);
+          setInterestdata(res.data);
+          setInterestSize(res.data.length);
+        })
+    }
+    
+    // call the function
+    fetchData()
+    // make sure to catch any error
+    .catch(console.error);
+  //eslint-disable-next-line
+  }, []);
   
   function handleCloseDialogUpdate(){
     setShowPopUpUpdate(false);
@@ -258,6 +288,21 @@ const ProfilePage = () => {
                   onClose={handleCloseDialogInterest}
                   />
               )
+          }
+        </div>
+        <div className='interest-container'>
+          {
+            interestSize ? 
+            (interestData.map((data, index)=>(
+              <div className='single-interest' key={index}>
+                {data}
+              </div>
+            ))) : 
+            (
+              <div>
+
+              </div>
+            )
           }
         </div>
       </div>
