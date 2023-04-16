@@ -20,8 +20,22 @@ const port  = process.env.PORT || 4000;
 
 //This will allow the user in the frontend to consume the APIs that you have created without any problem.
 const cors = require('cors');
-app.use(cors({credentials:true, origin: ['http://localhost:3000','https://cipherschoolsclone.vercel.app']}));
+// app.use(cors({credentials:true, origin: ['http://localhost:3000','https://cipherschoolsclone.vercel.app']}));
 
+const origin =
+  process.env.NODE_ENV === "production"
+    ? 'https://cipherschoolsclone.vercel.app'
+    : 'http://localhost:3000'
+
+// Setting up cors
+app.use(
+  cors({
+    origin: origin,
+    preflightContinue: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 //import database connection file
 const dbConnect = require("./models/dbConnect");
