@@ -20,22 +20,7 @@ const port  = process.env.PORT || 4000;
 
 //This will allow the user in the frontend to consume the APIs that you have created without any problem.
 const cors = require('cors');
-// app.use(cors({credentials:true, origin: ['http://localhost:3000','https://cipherschoolsclone.vercel.app']}));
-
-const origin =
-  process.env.NODE_ENV === "production"
-    ? 'https://cipherschoolsclone.vercel.app'
-    : 'http://localhost:3000'
-
-// Setting up cors
-app.use(
-  cors({
-    origin: origin,
-    preflightContinue: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors({credentials:true, origin: ['http://localhost:3000','https://cipherschoolsclone.vercel.app']}));
 
 //import database connection file
 const dbConnect = require("./models/dbConnect");
@@ -47,11 +32,6 @@ app.listen(port, (req, res)=>{
     console.log(`Server Listening at port ${port}`);
 })
 
-//get request when server is live
-app.get('/',(req, res)=>{
-    res.status(200).json('Server is Live');
-})
-
 //user Router  
 const userRouter = require('./routes/authRoutes')
 app.use('/auth/',userRouter)
@@ -60,5 +40,9 @@ app.use('/auth/',userRouter)
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profile/', profileRouter);
 
+//get request when server is live
+app.get('/',(req, res)=>{
+    res.status(200).json('Server is Live');
+})
 
 module.exports = app;
