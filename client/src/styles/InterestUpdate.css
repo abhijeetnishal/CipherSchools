@@ -77,6 +77,10 @@
     justify-content: flex-end;
     padding-right: 15px;
 }
+.profile-interest-container{
+    display: flex;
+    flex-direction: row;
+}
 
 @media screen and (max-width: 480px) {
     .interestModalContainer{

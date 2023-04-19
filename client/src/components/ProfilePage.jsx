@@ -290,7 +290,7 @@ const ProfilePage = () => {
               )
           }
         </div>
-        <div className='interest-container'>
+        <div className='profile-interest-container'>
           {
             interestSize ? 
             (interestData.map((data, index)=>(
